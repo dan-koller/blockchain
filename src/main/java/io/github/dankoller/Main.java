@@ -16,7 +16,7 @@ public class Main {
             miners[i - 1].join();
         }
         for (Block b : Blockchain.getBlocks()) {
-            b.printInfo();
+            System.out.println(b);
         }
     }
 }

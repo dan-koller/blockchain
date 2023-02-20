@@ -54,42 +54,38 @@ public class Block implements Comparable<Block> {
         this.messages = messages;
     }
 
-    public void printInfo() {
-        System.out.printf("Block:%n" +
-                        "Created by miner%d%n" +
-                        "miner%s gets 100 VC%n" +
-                        "Id: %d%n" +
-                        "Timestamp: %d%n" +
-                        "Magic number: %d%n" +
-                        "Hash of the previous block:%n" +
-                        "%s%n" +
-                        "Hash of the block:%n" +
-                        "%s%n",
-                foundByMiner.getMinerId(),
-                foundByMiner.getMinerId(),
-                id,
-                timestamp,
-                magicNumber,
-                previousBlock,
-                currentBlock);
-        if (messages.isEmpty()) {
-            System.out.println("Block data: no messages");
-        } else {
-            System.out.println("Block data:");
-            messages.forEach(System.out::println);
-        }
-        System.out.printf("Block was generating for %d seconds%n", secondsToGenerate);
-        validateMiningTime();
-        System.out.println();
+    @Override
+    public String toString() {
+        return "Block:\n" +
+                "Created by miner" + foundByMiner.getMinerId() + "\n" +
+                "miner" + foundByMiner.getMinerId() + " gets 100 VC\n" +
+                "Id: " + id + "\n" +
+                "Timestamp: " + timestamp + "\n" +
+                "Magic number: " + magicNumber + "\n" +
+                "Hash of the previous block:\n" + previousBlock + "\n" +
+                "Hash of the block:\n" + currentBlock + "\n" +
+                "Block data:\n" + getMessages() +
+                "Block was generating for " + secondsToGenerate + " seconds\n" +
+                getMiningDuration() + "\n";
     }
 
-    private void validateMiningTime() {
-        if (secondsToGenerate > 60) {
-            System.out.println("N was decreased by 1");
-        } else if (secondsToGenerate < 10) {
-            System.out.printf("N was increased to %d%n", zeros + 1);
+    private String getMessages() {
+        if (messages.isEmpty()) {
+            return "no messages\n";
         } else {
-            System.out.println("N stays the same");
+            StringBuilder sb = new StringBuilder();
+            messages.forEach(message -> sb.append(message).append("\n"));
+            return sb.toString();
+        }
+    }
+
+    private String getMiningDuration() {
+        if (secondsToGenerate > 60) {
+            return "N was decreased by 1";
+        } else if (secondsToGenerate < 10) {
+            return "N was increased to " + (zeros + 1);
+        } else {
+            return "N stays the same";
         }
     }
 
