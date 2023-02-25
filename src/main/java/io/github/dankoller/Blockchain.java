@@ -13,6 +13,9 @@ final class Blockchain {
     private static Set<Block> blocks;
     private static List<String> messages;
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private Blockchain() {
         zeros = 0;
         prevBlockHash = "0";

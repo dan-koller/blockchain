@@ -15,6 +15,16 @@ public class Block implements Comparable<Block> {
     private final int zeros;
     private List<String> data;
 
+    /**
+     * Create a new block. The hash of the previous block is set to the hash of the last block in the blockchain.
+     * The amount of zeros for the hash is set to the number of zeros in the blockchain.
+     *
+     * @param timestamp         Timestamp when the block was created
+     * @param magicNumber       Random number for the hash
+     * @param secondsToGenerate Amount of time in seconds the miner needed to mine the block
+     * @param currentBlockHash  Hash of the current block
+     * @param foundByMiner      Miner who found the block
+     */
     public Block(long timestamp, long magicNumber, long secondsToGenerate, String currentBlockHash, Miner foundByMiner) {
         this.timestamp = timestamp;
         this.magicNumber = magicNumber;
@@ -87,6 +97,11 @@ public class Block implements Comparable<Block> {
         this.data = data;
     }
 
+    /**
+     * Updated toString method to get the data of the block in a readable format.
+     *
+     * @return Data of the block
+     */
     @Override
     public String toString() {
         return "Block:\n" +
