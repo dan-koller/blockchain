@@ -37,11 +37,7 @@ public class BlockchainUnitTest {
         // Get the output of the standard output stream
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        try {
-            Main.main(null);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Main.main(null);
         rawOutput = outContent.toString();
         // Split the output into lines separated by two \n
         output = rawOutput.split("\n\n");
