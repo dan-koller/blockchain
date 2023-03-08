@@ -103,8 +103,10 @@ public class BlockchainUnitTest {
         for (int i = 0; i < output.length; i++) {
             for (int j = i + 1; j < output.length; j++) {
                 long blockTimestamp1Long = Long.parseLong(output[i].split("\n")[4].split(": ")[1]);
-                // Add a bias of 1 second to the second block timestamp
-                long blockTimestamp2Long = Long.parseLong(output[j].split("\n")[4].split(": ")[1]) + 1;
+                // Add a bias of 5ms to the second block timestamp to avoid false positives
+                // because (very rarely) the timestamps can be almost equal
+                // (e.g. 1610000000000 and 1610000000001) and the test would fail due to rounding errors
+                long blockTimestamp2Long = Long.parseLong(output[j].split("\n")[4].split(": ")[1]) + 5;
                 String blockTimestamp1 = Long.toString(blockTimestamp1Long);
                 String blockTimestamp2 = Long.toString(blockTimestamp2Long);
                 assertNotEquals(blockTimestamp1, blockTimestamp2,

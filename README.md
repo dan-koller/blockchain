@@ -61,7 +61,7 @@ The application is tested using JUnit 5. The code coverage is 100% for classes, 
 Run the tests with the following command:
 
 ```shell
-gradle test
+./gradlew test
 ```
 
 ## Contributing
